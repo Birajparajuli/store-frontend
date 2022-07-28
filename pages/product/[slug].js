@@ -1,7 +1,9 @@
 import { useQuery } from "urql"
 import { GET_PRODUCT } from "../../lib/query"
 import { useRouter } from 'next/router'
-import Router from "next/dist/server/router"
+import { ProductDetail, ProductInfo, AddToCart, Quantity } from "../../styles/ProductDetail";
+
+import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai'
 
 export default function ProductDetails() {
     // Fetch slug
@@ -10,7 +12,7 @@ export default function ProductDetails() {
     const [results] = useQuery({
         query: GET_PRODUCT,
         variables: {
-            slug: "air-jordan-1-mid"
+            slug: query.slug
         }
 
     })
@@ -25,24 +27,24 @@ export default function ProductDetails() {
     if (!data) {
         return <p>No data</p>
     }
-    const product = data.products.data;
-    console.log(product);
+    const { title, description, image } = data.products.data[0].attributes;
+
 
     return (
-        <div>
-            {/* <img src="" alt="" /> */}
-            <div>
-                <h3>Title</h3>
-                <p>Description</p>
+        <ProductDetail>
+            <img src={image.data.attributes.formats.small.url} alt={title} />
+            <ProductInfo>
+                <h3>{title}</h3>
+                <p>{description}</p>
+                <Quantity>
+                    <span>Quantity</span>
+                    <AiFillMinusCircle />
+                    <p>0</p>
+                    <AiFillPlusCircle />
+                </Quantity>
+                <AddToCart>Add to Cart</AddToCart>
+            </ProductInfo>
 
-            </div>
-            <div>
-                <span>Quantity</span>
-                <button>-</button>
-                <p>0</p>
-                <button>+</button>
-            </div>
-            <button>Add to Cart</button>
-        </div>
+        </ProductDetail>
     )
 }

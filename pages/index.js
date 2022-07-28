@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Product from '../components/Product'
 import { useQuery } from 'urql'
 import { PRODUCT_QUERY } from '../lib/query'
+import { GalleryStyle } from '../styles/Gallary'
 
 
 export default function Home() {
@@ -34,11 +36,11 @@ export default function Home() {
       </Head>
 
       <main>
-        {products.map(product => (
-
-          <h1 key={product.attributes.slug}>{product.attributes.title}</h1>
-
-        ))}
+        <GalleryStyle>
+          {products.map(product => (
+            <Product key={product.attributes.slug} product={product} />
+          ))}
+        </GalleryStyle>
       </main>
 
     </div>
