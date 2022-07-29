@@ -8,6 +8,14 @@ export const ProductDetail = styled.div`
     img{
         width: 40%;
     }
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+
+        img{
+            width: 100%;
+        }
+    }
     `
 
 
@@ -23,6 +31,10 @@ export const ProductInfo = styled.div`
         font-size: 2rem;
         color: var(--primary);
     }
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+
 `
 
 export const Quantity = styled.div`
