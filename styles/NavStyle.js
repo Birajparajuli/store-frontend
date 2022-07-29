@@ -12,7 +12,7 @@ export const NavStyle = styled.div`
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1;
+    /* z-index: 1; */
     min-height: 60px;
     border-bottom: 1px solid #e6e6e6;
     
@@ -25,13 +25,11 @@ export const NavStyle = styled.div`
     }
     div {
         display: flex;
-        align-items: center;
+        /* align-items: center; */
         justify-content: flex-end;
-        margin-right: 2rem;
+       
         
-        h3 {
-            margin-right: 1rem;
-        }
+        
         svg {
             font-size: 1.6rem;
             color: #333;

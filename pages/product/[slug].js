@@ -2,10 +2,16 @@ import { useQuery } from "urql"
 import { GET_PRODUCT } from "../../lib/query"
 import { useRouter } from 'next/router'
 import { ProductDetail, ProductInfo, AddToCart, Quantity } from "../../styles/ProductDetail";
-
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai'
 
+import { useStateContext } from "../../lib/context";
+
 export default function ProductDetails() {
+    // Context API
+    const { qty, increaseQty, decreaseQty, cartItems, onAdd } = useStateContext();
+
+
+
     // Fetch slug
     const { query } = useRouter();
     // Fetch queries from strapi
@@ -38,11 +44,11 @@ export default function ProductDetails() {
                 <p>{description}</p>
                 <Quantity>
                     <span>Quantity</span>
-                    <AiFillMinusCircle />
-                    <p>0</p>
-                    <AiFillPlusCircle />
+                    <AiFillMinusCircle onClick={decreaseQty} />
+                    <p>{qty}</p>
+                    <AiFillPlusCircle onClick={increaseQty} />
                 </Quantity>
-                <AddToCart>Add to Cart</AddToCart>
+                <AddToCart onClick={() => onAdd(data.products.data[0].attributes, qty)}>Add to Cart</AddToCart>
             </ProductInfo>
 
         </ProductDetail>
