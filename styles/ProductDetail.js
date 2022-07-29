@@ -12,12 +12,16 @@ export const ProductDetail = styled.div`
 
 
 export const ProductInfo = styled.div`
-    width: 40%;
+    width:  50%;
     button{
         font-size: 1rem;
         font-weight: medium;
         padding: .5rem;
         cursor: pointer;
+    }
+    h3{
+        font-size: 2rem;
+        color: var(--primary);
     }
 `
 
