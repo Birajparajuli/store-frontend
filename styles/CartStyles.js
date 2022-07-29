@@ -10,6 +10,8 @@ export const CartWrapper = styled.div`
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: flex-end;
+    z-index: 2;
+    /* display: none; */
    
 
 `;
@@ -39,9 +41,9 @@ export const Card = styled.div`
 
 export const CardInfo = styled.div`
     width: 50%;
-    display: flex;
-    justify-content: space-between;
-`
+    /* display: flex;
+    justify-content: space-between; */
+`;
 
 export const EmptyStyle = styled.div`
     position: absolute;
@@ -62,4 +64,15 @@ export const EmptyStyle = styled.div`
 
     }
 
-    `
+    `;
+
+export const Quantity = styled.div`
+    display: flex;
+    align-items:center;
+    margin: 1rem 0;
+    svg{
+        margin: 10px;
+        color: var(--secondary);
+        cursor: pointer;
+    }
+`;

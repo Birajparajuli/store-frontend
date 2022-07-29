@@ -12,7 +12,7 @@ export const NavStyle = styled.div`
     top: 0;
     left: 0;
     right: 0;
-    /* z-index: 1; */
+    z-index: 1;
     min-height: 60px;
     border-bottom: 1px solid #e6e6e6;
     
@@ -27,6 +27,7 @@ export const NavStyle = styled.div`
         display: flex;
         /* align-items: center; */
         justify-content: flex-end;
+        position: relative;
        
         
         
@@ -34,6 +35,21 @@ export const NavStyle = styled.div`
             font-size: 1.6rem;
             color: #333;
             cursor: pointer;
+        }
+        span{
+            background: #ff2626;
+            color: #fff;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.6rem;
+            position: absolute;
+            right: 50px;
+            
+
         }
     }
 `;

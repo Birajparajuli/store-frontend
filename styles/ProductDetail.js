@@ -48,6 +48,7 @@ export const Quantity = styled.div`
     }
     svg{
         color: #494949;
+        cursor: pointer;
     }
     `
 
