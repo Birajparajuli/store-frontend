@@ -1,16 +1,30 @@
 import { useStateContext } from "../lib/context"
-import { CartWrapper, CartStyle, Card, CardInfo, EmptyStyle, Quantity } from "../styles/CartStyles";
+import { CartWrapper, CartStyle, Card, CardInfo, EmptyStyle, Quantity, Checkout } from "../styles/CartStyles";
 import { BsBagX } from 'react-icons/bs'
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai'
 
 export default function Cart() {
-    const { cartItems, setShowCart, onAdd, onRemove } = useStateContext();
+    const { cartItems, setShowCart, onAdd, onRemove, totalPrice } = useStateContext();
 
     return (
-        <CartWrapper onClick={() => setShowCart(false)}>
-            <CartStyle onClick={(e) => e.stopPropagation()}>
+        <CartWrapper
+            animate={{ opacity: 1 }}
+            initial={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowCart(false)}>
+            <CartStyle
+                initial={{ x: "50%" }}
+                animate={{ x: " 0%" }}
+                exit={{ x: "50%" }}
+                transition={{ type: "tween" }}
+                onClick={(e) => e.stopPropagation()}>
                 {cartItems.length < 1 && (
-                    <EmptyStyle>
+                    <EmptyStyle
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5 }}
+
+                    >
                         <BsBagX />
                         <h3>There is nothing in your bag.😥</h3>
 
@@ -20,7 +34,12 @@ export default function Cart() {
                 {cartItems.length >= 1 && (
                     cartItems.map(item => {
                         return (
-                            <Card key={item.slug}>
+                            <Card
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.2, duration: 0.4 }}
+
+                                key={item.slug}>
                                 <img src={item.image.data.attributes.formats.thumbnail.url} alt={item.title} />
                                 <CardInfo>
                                     <h3>{item.title}</h3>
@@ -38,10 +57,10 @@ export default function Cart() {
                     }))}
 
                 {cartItems.length >= 1 && (
-                    <div>
-                        <h3>Subtotal: </h3>
+                    <Checkout>
+                        <h3>Subtotal: ${totalPrice}</h3>
                         <button>Checkout</button>
-                    </div>
+                    </Checkout>
                 )}
 
 

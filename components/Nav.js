@@ -4,6 +4,8 @@ import { NavStyle } from "../styles/NavStyle";
 import Cart from "./Cart";
 import { useStateContext } from "../lib/context";
 
+const { AnimatePresence, motion } = require("framer-motion");
+
 export default function Nav() {
     const { showCart, setShowCart, total } = useStateContext();
 
@@ -21,7 +23,9 @@ export default function Nav() {
 
                 </div>
             </NavStyle>
-            {showCart && <Cart />}
+            <AnimatePresence>
+                {showCart && <Cart />}
+            </AnimatePresence>
         </>
     )
 }
