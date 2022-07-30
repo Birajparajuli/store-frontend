@@ -2,10 +2,44 @@ import { useStateContext } from "../lib/context"
 import { CartWrapper, CartStyle, Card, CardInfo, EmptyStyle, Quantity, Checkout } from "../styles/CartStyles";
 import { BsBagX } from 'react-icons/bs'
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai'
+import getStripe from "../lib/getStripe";
+
+// PAyment Integration
+const handleCheckout = async () => {
+    const stripe = await getStripe();
+    const response = await fetch('/api/stripe', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(cartItems)
+    })
+    const data = await response.json();
+    await stripe.redirectToCheckout({
+        sessionId: data.id
+    })
+
+}
+
 
 export default function Cart() {
     const { cartItems, setShowCart, onAdd, onRemove, totalPrice } = useStateContext();
+    // PAyment Integration
+    const handleCheckout = async () => {
+        const stripe = await getStripe();
+        const response = await fetch('/api/stripe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(cartItems)
+        })
+        const data = await response.json();
+        await stripe.redirectToCheckout({
+            sessionId: data.id
+        })
 
+    }
     return (
         <CartWrapper
             animate={{ opacity: 1 }}
@@ -17,6 +51,8 @@ export default function Cart() {
                 animate={{ x: " 0%" }}
                 exit={{ x: "50%" }}
                 transition={{ type: "tween" }}
+                layout
+
                 onClick={(e) => e.stopPropagation()}>
                 {cartItems.length < 1 && (
                     <EmptyStyle
@@ -38,7 +74,7 @@ export default function Cart() {
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: 0.2, duration: 0.4 }}
-
+                                layout
                                 key={item.slug}>
                                 <img src={item.image.data.attributes.formats.thumbnail.url} alt={item.title} />
                                 <CardInfo>
@@ -57,9 +93,9 @@ export default function Cart() {
                     }))}
 
                 {cartItems.length >= 1 && (
-                    <Checkout>
+                    <Checkout layout>
                         <h3>Subtotal: ${totalPrice}</h3>
-                        <button>Checkout</button>
+                        <button onClick={handleCheckout}>Checkout</button>
                     </Checkout>
                 )}
 
