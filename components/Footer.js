@@ -4,7 +4,7 @@ export default function Footer() {
     const date = new Date();
     return (
         <FooterStyle>
-            <h3>©️{date.getFullYear()} | Biraj Parajuli</h3>
+            <h3>©️{date.getFullYear()} Biraj Parajuli All Rights Reserved.</h3>
         </FooterStyle>
     )
 }

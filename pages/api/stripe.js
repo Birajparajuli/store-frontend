@@ -10,7 +10,7 @@ export default async function handler(req, res) {
                 mode: "payment",
                 payment_method_types: ["card"],
                 shipping_address_collection: {
-                    allowed_countries: ["US", "CA", "GB", "AU", "IE", "NZ", "IN", "NP"]
+                    allowed_countries: ["US", "CA", "NP"]
                 },
                 shipping_options: [
 
